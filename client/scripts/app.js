@@ -37,35 +37,3 @@ var App = {
   }
 
 };
-
-let compiled = _.template(
-  '<div class = "message">' +
-    '<div class = "username">' +
-      '<b>' +
-        '<%= username %>' +
-        ': ' +
-      '</b>' +
-      '<span class = "text">' +
-        '<%= text %>' +
-        ' ' +
-      '</span>' +
-      '<em class = "createdAt">' +
-        '<small>' +
-          '<%= createdAt %>' +
-        '</small>' +
-      '</em>' +
-    '</div>' +
-   '</div>');
-
-$.getJSON(Parse.server,
-  function(data) {
-    let i, html = "";
-    for (i = 0; i < data.results.length; i++) {
-      html += compiled(data.results[i]);
-    }
-    $('#chats').append(html);
-  });
-
-$(document).on("click", ".objectId", function() {
-  alert('object added');
-});
