@@ -2,12 +2,14 @@ var MessagesView = {
 
   $chats: $('#chats'),
 
-  initialize: function() {
-    MessagesView.render();
-  },
-
-  render: function() {
-    let compiled = _.template(
+  compiled: function (message) {
+    if (message.username === undefined) {
+      message['username'] = 'anonymous';
+    }
+    if (message.text === undefined) {
+      message['text'] = '';
+    }
+    let template = _.template(
       '<div class = "message">' +
         '<div class = "username">' +
           '<b>' +
@@ -18,29 +20,33 @@ var MessagesView = {
             '<%- text %>' +
             ' ' +
           '</span>' +
-          '<em class = "createdAt">' +
-            '<small>' +
-              '<%- createdAt %>' +
-            '</small>' +
-          '</em>' +
         '</div>' +
-       '</div>');
+      '</div>');
+    return template(message);
+  },
 
-    // Rooms.$appendRooms();
+  initialize: function() {
+    MessagesView.render();
+  },
 
-    $.getJSON(Parse.server,
-      function(data) {
-        console.log(data);
-        let i, html = "";
-        for (i = 0; i < data.results.length; i++) {
-          html += compiled(data.results[i]);
-        }
-        $('#chats').append(html);
-      });
+  render: function(data) {
+    $('#chats').empty();
+    console.log('data in render', data);
+    if (data !== undefined) {
+      for (let i = 0; i < data.results.length; i++) {
+        MessagesView.renderMessage(data.results[i]);
+      }
 
-    $(document).on("click", ".objectId", function() {
-      alert('object added');
-    });
+      // $(document).on("click", ".objectId", function() {
+      //   alert('object added');
+      // });
+    }
+  },
+
+  renderMessage: function(message) {
+    let html = '';
+    html += MessagesView.compiled(message);
+    $('#chats').append(html);
   }
 
 };
