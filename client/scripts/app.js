@@ -24,8 +24,6 @@ var App = {
       MessagesView.render(data);
       RoomsView.render(data);
       // examine the response from the server request:
-      console.log(data);
-      window.messageData = data;
       callback();
     });
   },

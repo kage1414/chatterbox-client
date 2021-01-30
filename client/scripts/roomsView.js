@@ -41,8 +41,6 @@ var RoomsView = {
   },
 
   renderRoom: function (roomName) {
-    // debugger;
-    // roomName = roomName.replace(/\n/g, '');
     if (Rooms.storage.roomName === undefined) {
       let roomHTML = RoomsView.compiled(roomName);
       $('#allrooms select').append(roomHTML);

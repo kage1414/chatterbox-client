@@ -11,30 +11,21 @@ var FormView = {
   },
 
   handleSubmit: function(event) {
-    // Stop the browser from submitting the form
-    console.log('this is event', event);
     event.preventDefault();
     let name = App.username;
-    console.log(name);
+
     let $text = $('#message').val();
-    console.log($text);
     let $room = $('#options').val();
     if ($room === 'All Rooms') {
       $room = '';
     }
-    console.log($room);
+
     let messageObject = {
       username: name,
       text: $text,
       roomname: $room
     };
     Parse.create(messageObject);
-
-    // console.log('click!');
-    // console.log(Messages);
-    // let $message = $('#message');
-    // console.log($message);
-    // Parse.create(Messages);
     App.fetch();
   },
 

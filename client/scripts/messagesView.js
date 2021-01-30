@@ -20,7 +20,23 @@ var MessagesView = {
             ' ' +
           '</span>' +
       '</div>');
-    return template(message);
+
+    let friendTemplate = _.template(
+      '<div class = "message">' +
+          '<b class = "username" value = "<%- username %>">' +
+            '<%- username %>' +
+            ':' +
+          '</b>' +
+          '<span class = "text">' +
+            '<%- text %>' +
+            ' ' +
+          '</span>' +
+      '</div>');
+    if (Friends.currentFriends[message.username]) {
+      return friendTemplate(message);
+    } else {
+      return template(message);
+    }
   },
 
   initialize: function() {
