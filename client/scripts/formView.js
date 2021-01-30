@@ -6,6 +6,8 @@ var FormView = {
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
     FormView.$button.on('click', FormView.handleRefresh);
+    FormView.handleRefresh();
+    $('#main #options').on('change', FormView.handleRefresh);
   },
 
   handleSubmit: function(event) {
@@ -17,6 +19,9 @@ var FormView = {
     let $text = $('#message').val();
     console.log($text);
     let $room = $('#options').val();
+    if ($room === 'All Rooms') {
+      $room = '';
+    }
     console.log($room);
     let messageObject = {
       username: name,

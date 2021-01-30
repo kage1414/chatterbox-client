@@ -29,15 +29,13 @@ var MessagesView = {
 
   render: function(data) {
     $('#chats').empty();
-    console.log('data in render', data);
     if (data !== undefined) {
+      let $roomname = $('#options option:selected').text();
       for (let i = 0; i < data.results.length; i++) {
-        MessagesView.renderMessage(data.results[i]);
+        if (RoomsView.roomNameFormat(data.results[i].roomname) === $roomname || $roomname === 'All Rooms') {
+          MessagesView.renderMessage(data.results[i]);
+        }
       }
-
-      // $(document).on("click", ".objectId", function() {
-      //   alert('object added');
-      // });
     }
   },
 
