@@ -11,16 +11,14 @@ var MessagesView = {
     }
     let template = _.template(
       '<div class = "message">' +
-        '<div class = "username">' +
-          '<b>' +
+          '<a class = "username" value = "<%- username %>">' +
             '<%- username %>' +
-            ': ' +
-          '</b>' +
+            ':' +
+          '</a>' +
           '<span class = "text">' +
             '<%- text %>' +
             ' ' +
           '</span>' +
-        '</div>' +
       '</div>');
     return template(message);
   },

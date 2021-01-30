@@ -1,5 +1,5 @@
 var Messages = {
-  username: '',
-  text: 'test',
-  roomname: 'lobby'
+  // username: '',
+  // text: 'test',
+  // roomname: 'lobby'
 };
